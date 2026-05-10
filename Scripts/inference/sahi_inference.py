@@ -11,7 +11,7 @@ from sahi.predict import get_sliced_prediction
 # CONFIGURATION
 # =========================
 
-MODEL_PATH = r"models/yolo8_56.pt"
+MODEL_PATH = r"models/yolo8.pt"
 INPUT_DIR = r"D:/test_clas_opuntia/test/Opuntia"
 OUTPUT_DIR = Path("outputs")
 RAW_PRED_PATH = OUTPUT_DIR / "predictions_raw.json"
