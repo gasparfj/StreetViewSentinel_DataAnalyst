@@ -30,7 +30,8 @@ The pipeline is designed to:
 
 ## Project Structure
 
-```text
+```
+
 StreetViewSentinel_DataAnalyst/
 │
 ├── data/
@@ -56,6 +57,7 @@ StreetViewSentinel_DataAnalyst/
 │
 ├── requirements.txt
 └── README.md
+
 ```
 ---
 
