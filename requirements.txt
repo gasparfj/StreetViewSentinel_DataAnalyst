@@ -1,0 +1,9 @@
+ultralytics
+sahi
+opencv-python
+numpy
+pandas
+roboflow
+torch
+torchvision
+PyYAML
