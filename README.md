@@ -42,10 +42,10 @@ StreetViewSentinel_DataAnalyst/
 │   ├── data
 │   │   ├── prediction_window_crops.py  # Crop images for a better inference (remove non information areas)
 │   ├── train                           
-│   │   ├── preprocessing.py            # Model training
+│   │   ├── train.py            # Model training
 │   └── inference
 │       ├── sahi_inference.py           # Inference using SAHI
-│       ├── export_csv.py               # Export results with the associated metadata
+│       └── export_csv.py               # Export results with the associated metadata
 │
 │
 ├── requirements.txt
