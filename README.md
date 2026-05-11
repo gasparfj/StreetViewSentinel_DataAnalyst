@@ -34,26 +34,19 @@ The pipeline is designed to:
 
 StreetViewSentinel_DataAnalyst/
 │
-├── data/
-│   ├── raw/                  # Original dataset (Roboflow)
-│   ├── processed/            # Tiled / transformed dataset
 │
 ├── models/
-│   └── yolo8_56.pt           # Trained detection model
+│   └── yolo8.pt                        # Trained detection model
 │
-├── scripts/
-│   ├── inference.py          # Runs SAHI inference (outputs JSON)
-│   ├── export_csv.py         # Converts predictions to CSV
-│   ├── preprocessing.py      # Smart tiling & cropping
-│   └── training.py           # Model training
+├── Scripts/
+│   ├── data
+│   │   ├── prediction_window_crops.py  # Crop images for a better inference (remove non information areas)
+│   ├── train                           
+│   │   ├── preprocessing.py            # Model training
+│   └── inference
+│       ├── sahi_inference.py           # Inference using SAHI
+│       ├── export_csv.py               # Export results with the associated metadata
 │
-├── outputs/
-│   ├── predictions_raw.json  # Raw inference results
-│   └── predictions.csv       # Final structured dataset
-│
-├── utils/
-│   ├── metadata.py
-│   ├── image_utils.py
 │
 ├── requirements.txt
 └── README.md
@@ -86,7 +79,7 @@ Large images are split into smaller tiles to improve detection performance:
 ### 3. Model Training
 
 A YOLOv8 model is trained using the processed dataset.
-Model is stored in: models/yolo8_56.pt
+Model is stored in: models/yolo8.pt
 
 ---
 
@@ -98,8 +91,6 @@ python scripts/inference.py
 This step:
 - Uses SAHI sliding window inference
 - Processes each image in tiles
-- Outputs raw predictions in JSON format
-- Output: outputs/predictions_raw.json
 
 ---
 
@@ -162,17 +153,8 @@ Main libraries:
 - outputs/ is ignored in version control (.gitignore)
 - Metadata must share the same base filename as images
 - Cropped images are identified using _L and _R suffixes
-- Designed for high-resolution aerial/street imagery
+- Designed for high-resolution street imagery
 
----
-
-## Future Improvements
-
-- Parquet export instead of CSV
-- Parallel inference
-- Experiment tracking (MLflow integration)
-- Automatic dataset validation
-- Spatial reconstruction of detections across tiles
 
 ---
 
