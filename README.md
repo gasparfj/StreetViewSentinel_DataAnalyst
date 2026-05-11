@@ -40,9 +40,11 @@ StreetViewSentinel_DataAnalyst/
 │
 ├── Scripts/
 │   ├── data
-│   │   ├── prediction_window_crops.py  # Crop images for a better inference (remove non information areas)
+│   │   ├── download_dataset_from_roboflow.py  
+│   │   ├── smart_tilling.py            # Preproces the dataset creating tiles centered arround annotated objects
+│   │   └── prediction_window_crops.py  # Crop images for a better inference (remove non information areas)
 │   ├── train                           
-│   │   ├── train.py            # Model training
+│   │   ├── train.py                    # Model training
 │   └── inference
 │       ├── sahi_inference.py           # Inference using SAHI
 │       └── export_csv.py               # Export results with the associated metadata
@@ -58,21 +60,16 @@ StreetViewSentinel_DataAnalyst/
 
 ### 1. Dataset Preparation
 
-Images are downloaded from Roboflow and stored in: data/raw/
-
-Each image may include:
-- Original image
-- Metadata file (same name as image)
-- Additional auxiliary files (ignored)
+Images are downloaded from Roboflow.
 
 ---
 
 ### 2. Smart Tiling (Preprocessing)
 
 Large images are split into smaller tiles to improve detection performance:
-- Vertical split into left/right halves  
-- Cropping using predefined margins  
-- Outputs saved in data/processed/
+- Tiles of 2000x2000 pixels centered arround annotated objects
+- Negative tiles created in negative images copying the coordinates of random positive tiles
+- 90/10 positive/negative relation
 
 ---
 
@@ -105,7 +102,8 @@ This step:
 - Reconstructs original image identity (_L, _R)
 - Extracts bounding boxes and confidence scores
 - Generates final CSV
-- Output: outputs/predictions.csv
+
+The metadata is in the folder downloaded from Google Street View, wich contains all the images and a metadata file for each images (sharing the same name).
 
 ---
 
@@ -124,6 +122,7 @@ This step:
 | bbox_ymin | Bounding box coordinate |
 | bbox_xmax | Bounding box coordinate |
 | bbox_ymax | Bounding box coordinate |
+| bbox_area | Bounding box area|
 
 ---
 
@@ -138,6 +137,7 @@ Main libraries:
 - opencv-python
 - numpy
 - pandas
+- roboflow
 
 ---
 
