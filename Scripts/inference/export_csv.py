@@ -12,8 +12,6 @@ INPUT_DIR = r"" # Path to dataset directory containing images and metadata
 RAW_PRED_PATH = Path("outputs/predictions_raw.json")
 CSV_OUTPUT_PATH = Path("outputs/predictions.csv")
 
-VALID_EXT = (".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff")
-
 
 # =========================
 # UTILITIES
